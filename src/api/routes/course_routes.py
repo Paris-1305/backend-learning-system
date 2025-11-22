@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify
-from ...infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
+#from ...infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
+from infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
 from ...application.use_cases.get_course_by_id import GetCourseById
 from ...application.use_cases.get_all_courses import GetAllCourses
 from ..middleware.auth_middleware import require_api_key
