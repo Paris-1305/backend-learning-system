@@ -12,7 +12,8 @@ def create_app():
     # Enable CORS for all routes
     #CORS(app)
   # Enable CORS for all routes FROM your frontend
-    CORS(app, resources={r"/api/*": {"origins": "https://learningfy.netlify.app/"}})
+    #CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
+    CORS(app, resources={r"/api/*": {"origins": "https://learningfy.netlify.app"}})
     # Serve OpenAPI spec
     @app.route('/openapi.json')
     def serve_openapi():
