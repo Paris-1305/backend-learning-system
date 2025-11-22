@@ -61,11 +61,20 @@
 #             duration=row['duration']
 #         )
         
-import json
+# import json
+# from typing import List, Optional
+#from ...domain.entities.course import Course, CourseDescription
+#from ..database.connection import DatabaseConnection
+# from src.domain.entities.course import Course , CourseDescription
+# from src.domain.repositories.course_repository import CourseRepository
+# from src.infrastructure.database.connection import DatabaseConnection
 from typing import List, Optional
-from ...domain.entities.course import Course, CourseDescription
-from ...domain.repositories.course_repository import CourseRepository
-from ..database.connection import DatabaseConnection
+import json
+from src.domain.entities.course import Course, CourseDescription
+from src.domain.repositories.course_repository import CourseRepository
+from src.infrastructure.database.connection import DatabaseConnection
+
+
 
 class SQLiteCourseRepository(CourseRepository):
     """SQLite implementation of CourseRepository"""

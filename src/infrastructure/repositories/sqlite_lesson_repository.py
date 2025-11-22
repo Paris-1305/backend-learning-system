@@ -1,7 +1,10 @@
 from typing import List, Optional
-from ...domain.entities.lesson import Lesson
-from ...domain.repositories.lesson_repository import LessonRepository
-from ..database.connection import DatabaseConnection
+# from ...domain.entities.lesson import Lesson
+# from ...domain.repositories.lesson_repository import LessonRepository
+# from ..database.connection import DatabaseConnection
+from src.domain.entities.lesson import Lesson
+from src.domain.repositories.lesson_repository import LessonRepository
+from src.infrastructure.database.connection import DatabaseConnection
 
 
 class SQLiteLessonRepository(LessonRepository):

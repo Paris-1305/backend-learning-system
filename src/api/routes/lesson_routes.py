@@ -50,13 +50,20 @@
 #     # 3. Handle case where course exists but has no lessons
 #     pass
 
+# from flask import Blueprint, jsonify
+# from src.api.middleware.auth_middleware import require_api_key
+#from ...infrastructure.repositories.sqlite_lesson_repository import SQLiteLessonRepository
+# from infrastructure.repositories.sqlite_lesson_repository import SQLiteLessonRepository
+# from infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
+# from infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
+# from application.use_cases.get_lessons_by_course import GetLessonsByCourse
 from flask import Blueprint, jsonify
 from src.api.middleware.auth_middleware import require_api_key
-#from ...infrastructure.repositories.sqlite_lesson_repository import SQLiteLessonRepository
-from infrastructure.repositories.sqlite_lesson_repository import SQLiteLessonRepository
-from infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
-from ...infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
-from ...application.use_cases.get_lessons_by_course import GetLessonsByCourse
+from src.infrastructure.repositories.sqlite_lesson_repository import SQLiteLessonRepository
+from src.infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
+from src.application.use_cases.get_lessons_by_course import GetLessonsByCourse
+
+
 
 lesson_bp = Blueprint("lesson", __name__, url_prefix="/api")
 

@@ -1,9 +1,16 @@
-from flask import Blueprint, jsonify
-#from ...infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
-from infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
-from ...application.use_cases.get_course_by_id import GetCourseById
-from ...application.use_cases.get_all_courses import GetAllCourses
-from ..middleware.auth_middleware import require_api_key
+# from flask import Blueprint, jsonify
+# #from ...infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
+# from src.infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
+# from application.use_cases.get_course_by_id import GetCourseById
+# from application.use_cases.get_all_courses import GetAllCourses
+# from ..middleware.auth_middleware import require_api_key
+from flask import Blueprint, jsonify, request
+from src.infrastructure.repositories.sqlite_course_repository import SQLiteCourseRepository
+from src.application.use_cases.get_course_by_id import GetCourseById
+from src.application.use_cases.get_all_courses import GetAllCourses
+from src.api.middleware.auth_middleware import require_api_key
+
+
 from flask import request
 
 course_bp = Blueprint('course', __name__)
