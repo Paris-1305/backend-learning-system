@@ -98,7 +98,7 @@ def create_app():
     CORS(
     app,
     resources={r"/*": {  
-        "origins": ["http://localhost:5173", "https://learningfy.netlify.app"],
+        "origins": ["http://localhost:5173", "https://learnifysy.netlify.app"],
         "supports_credentials": True,
         "allow_headers": ["Content-Type", "Authorization", "x-api-key"],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
