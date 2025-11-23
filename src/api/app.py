@@ -120,7 +120,7 @@ def create_app():
         origin = request.headers.get("Origin")
 
         allowed = [
-            "http://localhost:5173",
+            
             "https://learningfy.netlify.app"
         ]
 
