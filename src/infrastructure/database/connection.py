@@ -132,7 +132,7 @@ class DatabaseConnection:
         conn.close()
 
     def get_connection(self):
-        """Return a DB connection with dictionary row support"""
-        conn = sqlite3.connect(self.db_path)
-        conn.row_factory = sqlite3.Row
-        return conn
+      conn = sqlite3.connect(self.db_path)
+      conn.row_factory = sqlite3.Row
+      return conn  # no comma
+

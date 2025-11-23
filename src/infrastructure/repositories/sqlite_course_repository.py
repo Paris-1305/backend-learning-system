@@ -136,7 +136,8 @@
 # #     }
 # # ]
 # #             for course in sample_courses:
-# #                 self.create(course)
+# #   self.create(course)
+
 import sqlite3
 import json
 from typing import List, Optional
