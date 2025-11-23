@@ -96,17 +96,14 @@ def create_app():
     # to handle the OPTIONS request for paths like /courses (which was failing 
     # with a 404 because Flask couldn't find a route). 
     CORS(
-        app,
-        resources={r"/*": {  # <--- Changed from r"/api/*" to r"/*"
-            "origins": [
-                "http://localhost:5173",
-                "https://learningfy.netlify.app"
-            ],
-            "supports_credentials": True,
-            "allow_headers": ["Content-Type", "Authorization", "x-api-key"],
-            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        }},
-    )
+    app,
+    resources={r"/*": {  
+        "origins": ["http://localhost:5173", "https://learningfy.netlify.app"],
+        "supports_credentials": True,
+        "allow_headers": ["Content-Type", "Authorization", "x-api-key"],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    }},
+)
 
     # -------------------------------------------------
     # HANDLE OPTIONS REQUESTS (Redundant now, but kept for clarity)
