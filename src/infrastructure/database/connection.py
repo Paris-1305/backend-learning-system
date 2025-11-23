@@ -88,6 +88,7 @@ class DatabaseConnection:
             return
 
         self.db_path = Config.DATABASE_PATH
+        print("Using database:", self.db_path)
         self._initialized = True
         self._init_database()
 
