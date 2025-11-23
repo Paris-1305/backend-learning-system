@@ -3,15 +3,23 @@ from ...domain.repositories.course_repository import CourseRepository
 from ..dto.course_dto import CourseDTO
 
 
+# class GetCourseById:
+#     """Use case for retrieving a course by ID"""
+
+#     def __init__(self, course_repository: CourseRepository):
+#         self.course_repository = course_repository
+
+#     def execute(self, course_id: int) -> Optional[dict]:
+#         """Execute the use case"""
+#         course = self.course_repository.get_by_id(course_id)
+#         if course is None:
+#             return None
+#         return CourseDTO.from_entity(course)
+
 class GetCourseById:
-    """Use case for retrieving a course by ID"""
+    def __init__(self, course_repository):
+        self.repo = course_repository
 
-    def __init__(self, course_repository: CourseRepository):
-        self.course_repository = course_repository
-
-    def execute(self, course_id: int) -> Optional[dict]:
-        """Execute the use case"""
-        course = self.course_repository.get_by_id(course_id)
-        if course is None:
-            return None
-        return CourseDTO.from_entity(course)
+    def execute(self, course_id):
+        course = self.repo.get_by_id(course_id)
+        return course.to_dict() if course else None
