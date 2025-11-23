@@ -151,3 +151,14 @@ def delete_course(course_id):
     if not success:
         return jsonify({"error": "Course not found"}), 404
     return jsonify({"message": f"Course {course_id} deleted successfully"}), 200
+
+@course_bp.route("/debug-courses", methods=["GET"])
+def debug_courses():
+    repo = SQLiteCourseRepository()
+    courses = repo.get_all()
+    print("Total courses fetched:", len(courses))
+    print([c.to_dict() for c in courses[:20]])  # first 5 courses
+    return jsonify({
+        "count": len(courses),
+        "courses": [c.to_dict() for c in courses]
+    }), 200

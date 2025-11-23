@@ -70,7 +70,10 @@
 import sqlite3
 from typing import Optional
 from config import Config
+import os
 
+print("Current working dir:", os.getcwd())
+print("DB path used:", os.path.abspath(Config.DATABASE_PATH))
 
 class DatabaseConnection:
     """Manages SQLite database connections"""
@@ -134,5 +137,7 @@ class DatabaseConnection:
     def get_connection(self):
       conn = sqlite3.connect(self.db_path)
       conn.row_factory = sqlite3.Row
-      return conn  # no comma
+      return conn
+
+      
 

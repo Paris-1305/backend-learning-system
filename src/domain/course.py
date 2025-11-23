@@ -16,5 +16,5 @@ class Course:
             "description": self.description,
             "category": self.category,
             "imageUrl": self.image_url,
-            "difficulty": self.difficulty,
+            "difficulty": self.difficulty
         }

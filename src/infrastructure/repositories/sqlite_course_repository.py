@@ -156,12 +156,13 @@ class SQLiteCourseRepository(CourseRepository):
         return self.db.get_connection()
 
     def get_all(self) -> List[Course]:
-        conn = self._get_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM courses ORDER BY id")
-        rows = cursor.fetchall()
-        conn.close()
-        return [self._row_to_entity(row) for row in rows]
+      conn = self._get_connection()
+      cursor = conn.cursor()
+      cursor.execute("SELECT * FROM courses ORDER BY id")  # ordering by id
+      rows = cursor.fetchall()
+      conn.close()
+      return [self._row_to_entity(row) for row in rows]
+
 
     def get_by_id(self, course_id: int) -> Optional[Course]:
         conn = self._get_connection()
