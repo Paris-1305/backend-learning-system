@@ -215,26 +215,26 @@ class SQLiteCourseRepository(CourseRepository):
         if len(self.get_all()) == 0:
             print("No courses found. Inserting sample data...")
             sample_courses = [
-                {
-                    "title": "Introduction to HIV/AIDS",
-                    "description_intro": "Learn the basics of HIV/AIDS",
-                    "description_scope": ["Basics", "Prevention", "Treatment"],
-                    "category": "Health",
-                    "image_url": "https://via.placeholder.com/150",
-                    "difficulty": "Beginner",
-                    "lesson_count": 5,
-                    "duration": 120
-                },
-                {
-                    "title": "Advanced HIV Treatment",
-                    "description_intro": "Deep dive into antiretroviral therapy",
-                    "description_scope": ["ART", "Side effects", "Monitoring"],
-                    "category": "Health",
-                    "image_url": "https://via.placeholder.com/150",
-                    "difficulty": "Advanced",
-                    "lesson_count": 8,
-                    "duration": 180
-                }
-            ]
+       {
+        "title": "Python Basics",
+        "description_intro": "Learn Python from scratch",
+        "description_scope": ["variables", "loops", "functions"],
+        "category": "Programming",
+        "image_url": "https://example.com/python.png",
+        "difficulty": "beginner",  # ✅ must be exactly one of the allowed values
+        "lesson_count": 10,
+        "duration": 120
+    },
+    {
+        "title": "Advanced Python",
+        "description_intro": "Deep dive into Python",
+        "description_scope": ["decorators", "generators", "asyncio"],
+        "category": "Programming",
+        "image_url": "https://example.com/adv-python.png",
+        "difficulty": "advanced",  # ✅ correct spelling
+        "lesson_count": 15,
+        "duration": 180
+    }
+]
             for course in sample_courses:
                 self.create(course)
