@@ -99,9 +99,9 @@ def handle_options_request():
 @course_bp.route('/courses', methods=['GET'])
 @require_api_key
 def get_courses():
-    print("GET /api/courses called")  # debug
-    courses = get_all_courses.execute()
+    courses = get_all_courses.execute()  # Should return list of dicts
     return jsonify(courses), 200
+
 
 
 # GET /api/courses/<course_id>
