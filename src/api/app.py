@@ -66,7 +66,6 @@
 #     app.register_blueprint(lesson_bp, url_prefix='/api')
 
 #     return app
-
 import os
 import logging
 from flask import Flask, send_from_directory, request
@@ -86,45 +85,61 @@ def create_app():
 
     @app.before_request
     def log_request():
+        # Log all incoming requests to help debug the 404/OPTIONS issue
         logger.info(f"➡️ {request.method} {request.url}")
         logger.info(f"Headers: {dict(request.headers)}")
 
     # -------------------------------------------------
-    # ENABLE GLOBAL CORS
+    # ENABLE GLOBAL CORS (WIDENED TO '/*' for diagnosis)
     # -------------------------------------------------
+    # IMPORTANT: Changing r"/api/*" to r"/*" allows the CORS middleware
+    # to handle the OPTIONS request for paths like /courses (which was failing 
+    # with a 404 because Flask couldn't find a route). 
     CORS(
         app,
-        resources={r"/api/*": {
+        resources={r"/*": {  # <--- Changed from r"/api/*" to r"/*"
             "origins": [
                 "http://localhost:5173",
                 "https://learningfy.netlify.app"
-            ]
+            ],
+            "supports_credentials": True,
+            "allow_headers": ["Content-Type", "Authorization", "x-api-key"],
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         }},
-        supports_credentials=True,
-        allow_headers=["Content-Type", "Authorization", "x-api-key"],
-        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     )
 
     # -------------------------------------------------
-    # HANDLE OPTIONS REQUESTS
+    # HANDLE OPTIONS REQUESTS (Redundant now, but kept for clarity)
     # -------------------------------------------------
     @app.route("/api/<path:path>", methods=["OPTIONS"])
-    def api_options(path):
+    @app.route("/<path:path>", methods=["OPTIONS"]) # Added a catch-all OPTIONS handler
+    def api_options(path=None):
+        # The CORS middleware should handle the headers, this just ensures a 200 OK response
+        # is returned for any OPTIONS request that might otherwise hit a 404.
         return ("", 200)
 
     # -------------------------------------------------
-    # Force-CORS on all responses (fix Render bug)
+    # Force-CORS on all responses (fix Render bug) - Remove if no longer needed
     # -------------------------------------------------
-    
     @app.after_request
     def add_cors_headers(response):
-      response.headers["Access-Control-Allow-Origin"] = request.headers.get("Origin")
-      response.headers["Vary"] = "Origin"
-      response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, x-api-key"
-      response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
-      response.headers["Access-Control-Allow-Credentials"] = "true"
-      return response
-
+        # Since CORS is now configured globally, this section is mostly redundant
+        # but kept to ensure maximum compatibility.
+        origin = request.headers.get("Origin")
+        allowed = [
+            "https://learningfy.netlify.app",
+            "http://localhost:5173"
+        ]
+        
+        # Only set Access-Control-Allow-Origin if the Origin is in our allowed list
+        if origin in allowed:
+            response.headers["Access-Control-Allow-Origin"] = origin
+        
+        # Ensure other headers are always present on all responses
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, x-api-key"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+        return response
 
     # -------------------------------------------------
     # Serve OpenAPI Spec
